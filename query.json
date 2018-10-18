@@ -1,0 +1,15 @@
+{
+                "query": {
+                                "bool": { "must":
+                                [
+                                        { "range": { "@timestamp": {"from": "now-15m","to": "now" }}},
+                                        { "match": { "emsobject.URL": "tcp://eme-bwp03.pharma.aventis.com:9084" }},
+                                        { "match": { "emsobject.type.keyword": "queue" }},
+                                        { "terms": { "emsobject.Name.keyword": ["prd.q.ebo.IBus.C.COUPA.Approvals_IN","prd.q.ebo.CloudAlerts.O.CoupaApprovals","prd.q.eb
+o.IBus.C.WORKDAY.Approvals_IN","prd.q.ebo.CloudAlerts.O.WorkdayTimeOffApprovals","prd.q.ebo.IBus.C.ConcurApprovals","prd.q.ebo.CloudAlerts.O.Expense","prd.q.ebo.CloudAl
+erts.O.TravelRequest","prd.q.ebo.APPROVAL_DELETE","prd.q.ebo.APPROVAL_INSERT","prd.e.ebo.APPROVAL_UPDATE"] }},
+                                        { "range": { "emsobject.PendingMessageCount" : { "gte":2000} }}
+                                ]
+                                }
+                        }
+                }
