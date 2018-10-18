@@ -1,10 +1,9 @@
 import sys
 import os
 import datetime
-import json
 import elasticsearch
 from elasticsearch import Elasticsearch
-from ssl import create_default_context
+
 
 timestamp = datetime.datetime.now().strftime("%Y.%m.%d")
 targetindex = "index"+timestamp
