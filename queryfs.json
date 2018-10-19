@@ -1,1 +1,34 @@
+{
+                "query": {
+                                "bool": { "must":
+                                [
+                                        { "range": { "@timestamp": {"from": "now-15m","to": "now" }}},
+                                        { "match": { "emsobject.URL": "url" }}
+                                ]
+                                }
+                        }
+                }
 
+
+
+
+
+GET *-metricbeat-2018.10.19/_search
+  {
+      "_source": 
+                [
+                  "beat.hostname","system.filesystem.mount_point","system.filesystem.total","system.filesystem.used.bytes","system.filesystem.used.pct"
+                ],
+      "query": {
+                  "bool": { 
+                            "must": [
+                                      { "range": { "@timestamp": {"from": "now-15m","to": "now" }}},
+                                      { "match": { "system.filesystem.type": "ext4" }},
+                                      { "range": { "system.filesystem.used.pct": { "gte": 0.8, "lte": 1 }}}
+                            ],
+                            "filter": [
+                                          { "terms": { "system.filesystem.mount_point": ["/usr","/var"] }}
+                            ]
+                  }
+      }
+}
