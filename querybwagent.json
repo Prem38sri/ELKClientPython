@@ -1,13 +1,15 @@
-GET *-index-2018.10.29/_search
+GET *-tibcobeat-*/_search
 {
   "_source": ["BW6agent.instance","BW6agent.agent","BW6agent.machine","BW6agent.machin","BW6agent.state"], 
+  
   "query": {
     "bool": {
       "must": [
-        { "range": {"@timestamp": {"from": "now-15m",
-            "to": "now"
-          }}},
-        {"exists": {"field": "BW6agent.agent"}}
+        { "range": { "@timestamp": {"from": "now-30d","to": "now" }}},
+        {"exists": {"field": "BW6agent.agent" }}
+      ], 
+      "must_not": [
+        { "match": {"BW6agent.state": "Running"}}
       ]
     }
   }
