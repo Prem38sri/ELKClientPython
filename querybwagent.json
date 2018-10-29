@@ -1,6 +1,5 @@
-GET *-tibcobeat-*/_search
 {
-  "_source": ["BW6agent.instance","BW6agent.agent","BW6agent.machine","BW6agent.machin","BW6agent.state"], 
+  "_source": ["BW6agent.instance","BW6agent.agent","BW6agent.machine","BW6agent.state"], 
   
   "query": {
     "bool": {
