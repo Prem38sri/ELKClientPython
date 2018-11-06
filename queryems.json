@@ -1,0 +1,10 @@
+{
+        "query": {
+                        "bool": { "must":
+                                        [
+                                                { "range": { "@timestamp": { "from": "now-15m","to": "now" }}},
+                                                { "range": { "emsobject.PendingMessageSize": { "gte": 1073741824,"lte": 107374182400 }}}
+                                        ]
+                                }
+                }
+}
